@@ -4,6 +4,7 @@ import SqlEditor from './SqlEditor.jsx'
 import ResultsTable from './ResultsTable.jsx'
 import SampleDataViewer from './SampleDataViewer.jsx'
 import HintBar from './HintBar.jsx'
+import { apiUrl } from '../lib/api.js'
 
 export default function Attempt() {
   const { index } = useParams()
@@ -13,7 +14,7 @@ export default function Attempt() {
   const [error, setError] = useState('')
 
   useEffect(() => {
-    fetch(`/api/assignments/${index}`)
+    fetch(apiUrl(`/api/assignments/${index}`))
       .then(r => r.json())
       .then(setAssignment)
   }, [index])
@@ -22,7 +23,7 @@ export default function Attempt() {
     if (!assignment) return
     setError('')
     setResult(null)
-    const res = await fetch('/api/execute', {
+    const res = await fetch(apiUrl('/api/execute'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ assignment, sql, workspaceId: `workspace_${index}` })
@@ -33,7 +34,7 @@ export default function Attempt() {
 
   const onHint = async () => {
     if (!assignment) return
-    const res = await fetch('/api/hints', {
+    const res = await fetch(apiUrl('/api/hints'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ assignment, sql })

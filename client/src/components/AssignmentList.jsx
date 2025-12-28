@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { apiUrl } from '../lib/api.js'
 
 export default function AssignmentList() {
   const [loading, setLoading] = useState(true)
@@ -8,7 +9,7 @@ export default function AssignmentList() {
 
   useEffect(() => {
     let mounted = true
-    fetch('/api/assignments')
+    fetch(apiUrl('/api/assignments'))
       .then(r => r.json())
       .then(data => {
         if (!mounted) return
