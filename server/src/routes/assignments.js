@@ -3,7 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import mongoose from 'mongoose'
 
-const seedsPath = path.resolve(process.cwd(), 'server', 'src', 'seeds', 'assignments.json')
+const seedsPath = path.resolve(process.cwd(), 'src', 'seeds', 'assignments.json')
 
 const AssignmentSchema = new mongoose.Schema({
   title: String,

@@ -11,6 +11,10 @@ const app = express()
 app.use(cors())
 app.use(express.json({ limit: '1mb' }))
 
+app.get('/', (req, res) => {
+  res.json({ ok: true, message: 'CipherSQLStudio backend', endpoints: ['/api/health', '/api/assignments', '/api/execute', '/api/hints'] })
+})
+
 app.get('/api/health', (req, res) => {
   res.json({ ok: true, service: 'CipherSQLStudio', time: new Date().toISOString() })
 })

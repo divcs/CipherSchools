@@ -20,6 +20,7 @@ export default function AssignmentList() {
   }, [])
 
   if (loading) return <div className="list">Loading assignments...</div>
+  if (!items.length) return <section className="list"><h2 className="list__title">Assignments</h2><p>No assignments found. Ensure the backend is running and seeds are accessible.</p></section>
   return (
     <section className="list" data-testid="assignment-list">
       <h2 className="list__title">Assignments</h2>
